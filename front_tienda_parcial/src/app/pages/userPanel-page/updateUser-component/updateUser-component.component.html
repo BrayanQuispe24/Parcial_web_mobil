@@ -1,0 +1,49 @@
+<div
+  class="   mx-auto  p-6 bg-[#102e4d] bg-opacity-90 text-white rounded-2xl shadow-lg backdrop-blur-sm w-[400px] h-[600px] flex flex-col justify-around ">
+  <h2 class="text-2xl font-bold text-center mb-6">Actualizar Usuario</h2>
+   <button (click)="modalUpdateUserService.showModalUpdateSwitch()"
+    class="absolute top-2 right-2 bg-red-600 px-[25px] py-[10] rounded-[5px] hover:scale-[1.05] hover:bg-red-400">X</button>
+   <form (submit)="updateUser($event)" class="space-y-4">
+    <!-- Nombre -->
+    <div>
+      <label for="nombre" class="block text-sm font-medium mb-1">Nombre</label>
+      <input id="nombre" name="nombre" type="text" required [value]="first_name()"
+        (input)="first_name.set(txtnombre.value)"
+        class="w-full px-4 py-2 rounded-lg bg-neutral-600 bg-opacity-70 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600 transition"
+        placeholder="Ej. Juan Pérez" #txtnombre />
+    </div>
+
+    <!-- Email -->
+    <div>
+      <label for="email" class="block text-sm font-medium mb-1">Email</label>
+      <input id="email" name="email" type="email" required [value]="email()" (input)="email.set(txtemail.value)"
+        class="w-full px-4 py-2 rounded-lg bg-neutral-600 bg-opacity-70 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600 transition"
+        placeholder="ejemplo@email.com" #txtemail />
+    </div>
+
+
+    <!-- Rol -->
+    <div>
+      <label for="rol" class="block text-sm font-medium mb-1">Rol</label>
+      <input id="rol" name="rol" type="text" required [value]="role()" (input)="role.set(txtrole.value)"
+        class="w-full px-4 py-2 rounded-lg bg-neutral-600 bg-opacity-70 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600 transition"
+        placeholder="client" #txtrole />
+    </div>
+    <!-- password -->
+    <div>
+      <label for="password" class="block text-sm font-medium mb-1">Contraseña</label>
+      <input id="password" name="password" type="password" required [value]="password()"
+        (input)="password.set(txtpassword.value)"
+        class="w-full px-4 py-2 rounded-lg bg-neutral-600 bg-opacity-70 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600 transition"
+        placeholder="nueva contraseña" #txtpassword />
+    </div>
+
+    <!-- Botón -->
+    <div class="pt-4">
+      <button type="submit"
+        class="w-full bg-green-700 bg-opacity-80 hover:bg-green-600 hover:bg-opacity-100 hover:scale-[1.02] transition-all px-4 py-2 rounded-xl text-white font-semibold shadow">
+        Actualizar Usuario
+      </button>
+    </div>
+  </form>
+</div>

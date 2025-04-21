@@ -1,0 +1,66 @@
+<div
+  class="h-full w-full bg-[#102e4d] bg-opacity-90 text-white p-4 box-border flex flex-col gap-4 rounded-tl-2xl overflow-hidden">
+
+  <!-- ENCABEZADO CON TÍTULO A LA IZQUIERDA Y BOTÓN A LA DERECHA -->
+  <div class="flex justify-between items-center py-4 px-6 bg-white/10 rounded-xl shadow-lg flex-none">
+    <h1 class=" w-[100%] text-4xl font-bold text-center">Gestión de Categorías</h1>
+  </div>
+
+  <!-- FILA PRINCIPAL: LISTA Y FORMULARIO -->
+  <div class="flex gap-4 flex-1 overflow-hidden">
+
+    <!-- LISTA -->
+    <div
+      class=" max-w-[80%] min-w-[70%] basis-2/3 bg-white/10 rounded-xl p-4 shadow-inner overflow-y-auto max-h-full flex flex-col border-2 border-blue-800 relative">
+      <div class="flex justify-between items-center mb-4 gap-4">
+        <input [value]="nombre()" (input)="nombre.set(txtnombre.value)" type="text" placeholder="Buscar categoría..."
+          #txtnombre
+          class="w-full px-4 py-2 rounded-lg text-white border-2 bg-[#102e4d] border-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600" />
+        <button (click)="buscarCategoria()"
+          class="px-4 py-2 rounded-lg text-white border-2 border-blue-700 bg-[#102e4d] focus:outline-none hover:ring-2 hover:ring-blue-600">
+          Buscar
+        </button>
+      </div>
+      <div class="flex-1">
+        <categoria-list />
+      </div>
+    </div>
+
+
+
+    <!-- FORMULARIO -->
+    <div
+      class=" max-h-[100%] max-w-[30%] min-w-[20%] basis-1/3 bg-white/10 rounded-xl p-4 shadow-inner flex flex-col justify-around border-2 border-blue-800 relative gap-2 overflow-y-auto">
+      @if(!modalActualizarCategoria.modalActualizarCategoria()){
+      <div>
+        <modal-actualizar class="" />
+      </div>
+      }
+      <div class="">
+        <formulario class="" />
+      </div>
+
+    </div>
+    @if(!modalSingleCategoria.modalSingleCategoria()){
+    <categoria-singlemodal
+      class="fixed   w-full h-full bg-[rgba(0,0,0,0.5)] flex justify-center items-center rounded-2xl top-0 left-0" />
+    }
+  </div>
+
+  <!-- PIE CON ESTADÍSTICAS -->
+  <div class="flex justify-around items-center h-24 bg-white/10 rounded-xl shadow-inner flex-none">
+    <div class="text-center">
+      <h3 class="text-lg font-semibold">Categorías</h3>
+      <p class="text-2xl">{{cantidad()}}</p>
+    </div>
+    <div class="text-center">
+      <h3 class="text-lg font-semibold">Activas</h3>
+      <p class="text-2xl">9</p>
+    </div>
+    <div class="text-center">
+      <h3 class="text-lg font-semibold">Inactivas</h3>
+      <p class="text-2xl">3</p>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,56 @@
+version: '3.8'  # Especifica la versión del archivo docker-compose, en este caso la 3.8
+
+services:  # Aquí comienzan los servicios que se van a levantar (contenedores)
+
+  postgres:  # Nombre del servicio de la base de datos PostgreSQL
+    image: postgres:17  # Imagen oficial de PostgreSQL, versión 17
+    container_name: postgres_db  # Nombre personalizado para el contenedor
+    restart: always  # Si el contenedor se detiene, Docker intentará reiniciarlo automáticamente
+    environment:  # Variables de entorno para configurar la base de datos
+      - POSTGRES_USER=postgres  # Usuario por defecto de PostgreSQL
+      - POSTGRES_PASSWORD=postgres  # Contraseña para el usuario
+      - POSTGRES_DB=DB_tienda_parcial_api  # Nombre de la base de datos que se creará al iniciar
+    ports:
+      - "5432:5432"  # Expone el puerto 5432 del contenedor al puerto 5432 del host
+    volumes:
+      - pgdata:/var/lib/postgresql/data  # Persiste los datos del contenedor en un volumen llamado "pgdata"
+    healthcheck:  # Revisa periódicamente si el servicio está saludable
+      test: ["CMD-SHELL", "pg_isready -U postgres -d DB_tienda_parcial_api"]  # Comando para verificar si la DB está lista
+      interval: 10s  # Intervalo entre chequeos
+      timeout: 5s  # Tiempo máximo para que una verificación responda
+      retries: 5  # Número de reintentos antes de marcar como "unhealthy"
+    networks:
+      - backend  # Conecta este servicio a una red llamada "backend"
+
+  pgadmin:  # Servicio para la interfaz gráfica de administración de PostgreSQL
+    image: dpage/pgadmin4  # Imagen oficial de pgAdmin 4
+    container_name: pgadmin  # Nombre del contenedor
+    restart: always  # Reinicia el contenedor automáticamente si falla
+    environment:  # Variables de entorno para configurar pgAdmin
+      PGADMIN_DEFAULT_EMAIL: admin@example.com  # Email de acceso a la interfaz web de pgAdmin
+      PGADMIN_DEFAULT_PASSWORD: admin  # Contraseña para ese usuario
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin  # Guarda los datos de configuración de pgAdmin en un volumen
+      - ./rp.sql:/tmp/rp.sql  # Monta un archivo SQL local dentro del contenedor para importarlo
+    ports:
+      - "5050:80"  # Expone el puerto 80 del contenedor en el puerto 5050 del host
+    user: "5050:5050"  # Ejecuta pgAdmin con el usuario y grupo con ID 5050 (evita problemas de permisos)
+    entrypoint: >  # Comando personalizado que se ejecuta al iniciar el contenedor
+      /bin/sh -c "
+        chown -R 5050:5050 /var/lib/pgadmin &&  # Cambia el propietario de los archivos para que coincidan con el usuario
+        chmod -R 775 /var/lib/pgadmin &&  # Cambia los permisos para que sean accesibles
+        mkdir -p /var/lib/pgadmin/storage/admin_example.com &&  # Crea una carpeta de almacenamiento para el usuario
+        cp /tmp/rp.sql /var/lib/pgadmin/storage/admin_example.com/rp.sql &&  # Copia el script SQL a esa carpeta
+        /entrypoint.sh"  # Llama al script de inicio original de pgAdmin
+    depends_on:
+      - postgres  # Este contenedor solo se levantará cuando el de PostgreSQL esté listo
+    networks:
+      - backend  # Conecta este servicio a la red "backend"
+
+networks:
+  backend:  # Define una red personalizada
+    external: true  # Indica que esta red ya debe existir fuera de este archivo (no la crea Docker Compose)
+
+volumes:
+  pgdata:  # Volumen para persistir los datos de PostgreSQL
+  pgadmin_data:  # Volumen para persistir la configuración y estado de pgAdmin

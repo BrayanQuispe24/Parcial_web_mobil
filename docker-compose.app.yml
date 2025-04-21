@@ -1,0 +1,39 @@
+services:
+  web:
+    build: ./ProyectoP1/  # Construye la imagen del backend Django desde la carpeta ProyectoP1
+    container_name: django_backend  # Nombre del contenedor para Django
+    command: python manage.py runserver 0.0.0.0:8000  # Inicia el servidor Django accesible desde cualquier IP
+    environment:  # Variables de entorno para conectar a la base de datos PostgreSQL y configurar CORS
+      - POSTGRES_HOST=postgres_db  # Nombre del contenedor del servicio PostgreSQL (debe coincidir con el nombre del servicio en el otro compose)
+      - POSTGRES_DB=DB_tienda_parcial_api  # Nombre de la base de datos
+      - POSTGRES_USER=postgres  # Usuario de PostgreSQL
+      - POSTGRES_PASSWORD=postgres  # Contraseña de PostgreSQL
+      - CORS_ALLOWED_ORIGINS=http://localhost:4000,http://angular-app:4000  # Orígenes permitidos para CORS (Angular)
+    volumes:
+      - ./ProyectoP1:/app  # Monta la carpeta del proyecto Django dentro del contenedor
+    ports:
+      - "8000:8000"  # Expone el puerto 8000 del contenedor al host
+    stdin_open: true  # Mantiene abierto el STDIN para entrada interactiva (útil para desarrollo)
+    tty: true  # Asigna una terminal virtual al contenedor
+    depends_on:
+      - angular-app  # Asegura que el contenedor angular-app se inicie antes que este (no espera que esté “listo”)
+    networks:
+      - backend  # Se conecta a la red backend
+      - frontend  # También a la red frontend
+
+  angular-app:
+    build: ./front_tienda_parcial/  # Construye la imagen del frontend Angular desde la carpeta parcial_front
+    container_name: angular_frontend  # Nombre del contenedor para Angular
+    ports:
+      - "4000:4000"  # Expone el puerto 4200 para la aplicación Angular
+    environment:
+      - API_URL=http://web:8000  # URL del backend Django, usando el nombre del contenedor "web"
+    networks:
+      - frontend  # Se conecta a la red frontend
+      - backend  # También se conecta a la red backend para poder comunicarse con Django
+
+networks:
+  backend:
+    external: true  # Usa una red existente llamada "backend" (ya creada previamente con `docker network create backend`)
+  frontend:
+    driver: bridge  # Crea una red interna aislada para el frontend (modo por defecto para redes internas)

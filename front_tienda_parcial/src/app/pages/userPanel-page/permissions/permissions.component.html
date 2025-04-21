@@ -1,0 +1,77 @@
+<div class="fixed inset-0 flex justify-center items-center -z-50">
+  <div class="   mx-auto  p-6 bg-[#102e4d] bg-opacity-90 text-white rounded-2xl shadow-lg backdrop-blur-sm w-[500px]">
+    <!-- Botón de cerrar -->
+    <button
+      class="absolute top-4 right-4 text-white bg-red-600 hover:bg-red-500 rounded-full w-10 h-10 flex items-center justify-center text-xl font-bold transition"
+      (click)="cerrarPermisoModal()">
+      ✕
+    </button>
+
+    <!-- Título -->
+    <h3 class="text-2xl font-bold text-center mb-8">Asignación de Permisos</h3>
+
+    <!-- Permisos en fila -->
+    <div class="flex justify-between items-center gap-6 mb-8">
+      <!-- Crear -->
+      <div class="flex flex-col items-center">
+        <input
+          type="checkbox"
+          id="crear"
+          class="w-6 h-6 accent-blue-600 mb-2"
+          [checked]="crear()"
+          (input)="crear.set(txtcrear.checked)"
+          #txtcrear
+        />
+        <label for="crear" class="text-lg font-semibold">Crear</label>
+      </div>
+
+      <!-- Eliminar -->
+      <div class="flex flex-col items-center">
+        <input
+          type="checkbox"
+          id="eliminar"
+          class="w-6 h-6 accent-red-500 mb-2"
+          [checked]="eliminar()"
+          (input)="eliminar.set(txteliminar.checked)"
+          #txteliminar
+        />
+        <label for="eliminar" class="text-lg font-semibold">Eliminar</label>
+      </div>
+
+      <!-- Actualizar -->
+      <div class="flex flex-col items-center">
+        <input
+          type="checkbox"
+          id="actualizar"
+          class="w-6 h-6 accent-yellow-500 mb-2"
+          [checked]="actualizar()"
+          (input)="actualizar.set(txtactualizar.checked)"
+          #txtactualizar
+        />
+        <label for="actualizar" class="text-lg font-semibold">Actualizar</label>
+      </div>
+
+      <!-- Ver -->
+      <div class="flex flex-col items-center">
+        <input
+          type="checkbox"
+          id="ver"
+          class="w-6 h-6 accent-green-500 mb-2"
+          [checked]="ver()"
+          (input)="ver.set(txtver.checked)"
+          #txtver
+        />
+        <label for="ver" class="text-lg font-semibold">Ver</label>
+      </div>
+    </div>
+
+    <!-- Botón aplicar -->
+    <div class="text-center">
+      <button
+      (click)="aplicarPermisos()"
+        class="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-2 rounded-xl transition-all w-[200px]">
+        Aplicar
+      </button>
+    </div>
+  </div>
+</div>

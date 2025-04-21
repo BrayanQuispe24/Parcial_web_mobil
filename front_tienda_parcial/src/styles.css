@@ -1,0 +1,20 @@
+/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+div,aside{
+  scrollbar-width: none;
+}
+section{
+  scrollbar-width: none;
+}
+html, body {
+  height: 100%;
+  margin: 0;
+}

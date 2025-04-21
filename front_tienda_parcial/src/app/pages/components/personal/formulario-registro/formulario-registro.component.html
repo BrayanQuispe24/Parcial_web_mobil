@@ -1,0 +1,88 @@
+<div class="   mx-auto  px-6 py-3 bg-[#102e4d] bg-opacity-90 text-white rounded-2xl shadow-lg backdrop-blur-sm ">
+  <h2 class="text-2xl font-bold text-center mb-2">Registrar Personal</h2>
+  <form class="space-y-4  flex flex-col justify-around">
+    <!-- Nombre -->
+    <div>
+      <label for="nombre" class="block text-sm font-medium mb-1">Nombre</label>
+      <input
+      [value]="nombre()"
+      (input)="nombre.set(txtnombre.value)"
+      id="descipcion" name="descipcion" type="text"
+        class="w-full px-4 py-1 rounded-lg text-white border-2 bg-[#102e4d] border-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600"
+        placeholder="jhon" #txtnombre />
+    </div>
+    <!-- apellido -->
+    <div>
+      <label for="apellido" class="block text-sm font-medium mb-1">Apellido</label>
+      <input
+      [value]="apellido()"
+      (input)="apellido.set(txtapellido.value)"
+      #txtapellido
+      id="apellido" name="apellido" type="text"
+        class="w-full px-4 py-1 rounded-lg text-white border-2 bg-[#102e4d] border-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600"
+        placeholder="Doe" />
+    </div>
+    <!-- Telefono -->
+    <div>
+      <label for="marca" class="block text-sm font-medium mb-1">Telefono</label>
+      <input
+      [value]="telefono()"
+      (input)="telefono.set(txttelefono.value)"
+      #txttelefono
+      id="marca" name="marca" type="text"
+        class="w-full px-4 py-1 rounded-lg text-white border-2 bg-[#102e4d] border-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600"
+        placeholder="777777777"  />
+    </div>
+    <!-- Direccion -->
+    <div>
+      <label for="categoria" class="block text-sm font-medium mb-1">Direccion</label>
+      <input
+      [value]="direccion()"
+      (input)="direccion.set(txtdireccion.value)"
+      #txtdireccion
+      id="categoria" name="categoria" type="text"
+        class="w-full px-4 py-1 rounded-lg text-white border-2 bg-[#102e4d] border-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600"
+        placeholder="Calle de ejemplo"  />
+    </div>
+    <!-- Fecha de nacimiento -->
+    <div>
+      <label for="fecha_nacimiento" class="block text-sm font-medium mb-1">Fecha de nacimiento</label>
+      <input
+      [value]="fecha_nacimiento()"
+      (input)="fecha_nacimiento.set(txtfecha.value)"
+      #txtfecha
+      id="fecha_nacimiento" name="fecha_nacimiento" type="date"
+        class="w-full px-4 py-1 rounded-lg text-white border-2 bg-[#102e4d] border-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600"
+        placeholder=" **/**/**" #txtprecio />
+    </div>
+    <!-- Correo electronico -->
+    <div>
+      <label for="correo_electronico" class="block text-sm font-medium mb-1">Correo electronico</label>
+      <input id="correo_electronico" name="correo_electronico" type="text"
+      [value]="correo_electronico()"
+      (input)="correo_electronico.set(txtcorreo.value)"
+        class="w-full px-4 py-1 rounded-lg text-white border-2 bg-[#102e4d] border-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600"
+        placeholder="ejemplo@example.com" #txtcorreo />
+    </div>
+    <!--Roles-->
+    <div>
+      <label for="rol" class="block text-sm font-medium text-white">Elige un rol</label>
+      <select
+      (input)="rol.set(selectRol.value)"
+      #selectRol
+      id="rol" name="rol"
+        class=" px-2 py-2 mt-1 block w-full rounded-md border border-blue-700 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+        <option class="text-black pt-1 bg-blue-500" value="Administrador">Administrador</option>
+        <option class="text-black pt-1 bg-blue-500" value="Vendedor">Vendedor</option>
+      </select>
+    </div>
+    <!-- Botón -->
+    <div class="pt-1">
+      <button type="submit"
+      (click)="registrarPersonal($event)"
+        class="w-full bg-blue-800 bg-opacity-80 hover:bg-blue-700 hover:bg-opacity-100 hover:scale-[1.02] transition-all px-4 py-2 rounded-xl text-white font-semibold shadow">
+        Registrar
+      </button>
+    </div>
+  </form>
+</div>

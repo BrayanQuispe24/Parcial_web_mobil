@@ -1,0 +1,17 @@
+<div
+  class="mx-auto h-full bg-blue-900 bg-opacity-90 text-white rounded-2xl flex flex-col backdrop-blur-sm overflow-hidden ">
+  <!-- Lista de categorías -->
+  <section class="flex-1 w-full bg-[#102e4d] rounded-2xl px-4 py-2 overflow-y-auto space-y-3 min-h-0 ">
+    <!-- Categorías -->
+    @if (listaMarcas(); as categorias) {
+    @for (marca of listaMarcas(); track marca.id) {
+    @if(marca.estado!==false){
+    <app-marca [marca]="marca" />
+    }
+
+    }
+    } @else {
+    <div class="text-center py-4">Cargando categorías...</div>
+    }
+  </section>
+</div>

@@ -1,0 +1,123 @@
+<div
+  class="h-full w-full bg-[#102e4d] bg-opacity-90 text-white p-4 box-border flex flex-col gap-4 rounded-tl-2xl overflow-hidden">
+
+  <!-- ENCABEZADO -->
+  <div class="flex justify-between items-center py-4 px-6 bg-white/10 rounded-xl shadow-lg flex-none flex-wrap gap-4">
+    <h1 class="text-4xl font-bold text-center flex-1">Gestión de Ventas</h1>
+    <div class="flex gap-2 flex-wrap justify-center">
+      <button (click)="exportPDFFacturas()"
+        class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg font-semibold">Descargar PDF</button>
+      <button (click)="exportarFacturasAExcel()"
+        class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg font-semibold">Descargar EXCEL</button>
+    </div>
+  </div>
+
+  <!-- FILTROS -->
+  <div class="flex gap-4 flex-wrap items-center bg-white/10 rounded-xl px-6 py-3 shadow-inner flex-none">
+    <div class="flex flex-col">
+      <label for="fechaInicio" class="text-sm">Desde:</label>
+      <input (change)="fechaInicio.set(txtInicio.value)" #txtInicio id="fechaInicio" type="date"
+        class="bg-[#102e4d] border border-blue-600 text-white rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+    </div>
+    <div class="flex flex-col">
+      <label for="fechaFin" class="text-sm">Hasta:</label>
+      <input
+      (change)="fechaFinal.set(txtFinal.value)" #txtFinal
+      id="fechaFin" type="date"
+        class="bg-[#102e4d] border border-blue-600 text-white rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+    </div>
+    <div class="flex-1 flex justify-end">
+      <button
+      (click)="mostrarI()"
+      class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg font-semibold h-fit mt-5">Filtrar</button>
+    </div>
+  </div>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="flex gap-4 flex-1 overflow-hidden flex-wrap md:flex-nowrap">
+
+    <!-- LISTADO DE VENTAS -->
+    <div
+      class="w-full md:max-w-[70%] bg-white/10 rounded-xl p-4 shadow-inner overflow-y-auto max-h-full flex flex-col border-2 border-blue-800 relative">
+
+      <!-- BUSCADOR -->
+      <div
+        class="w-[100%] bg-[#102e4d] rounded-xl p-1 shadow-inner border-2 border-blue-800 flex justify-around mt-1 mb-3">
+        <div class="w-[60%] grid grid-cols-5  gap-5">
+          <span class="text-center">ID</span>
+          <span class="text-center">ESTADO</span>
+          <span class="text-center">FECHA</span>
+          <span class="text-center">METODO</span>
+          <span class="text-center">MONTO</span>
+        </div>
+        <div class="w-[40%] flex justify-end pr-[50px]">
+          ACCIONES
+        </div>
+      </div>
+
+      <!-- TABLA SIMULADA -->
+      <div class="flex flex-col gap-2 overflow-y-auto text-sm">
+        <lista-facturas />
+      </div>
+    </div>
+
+    <!-- FORMULARIO -->
+    <div
+      class="w-full md:max-w-[30%] bg-white/10 rounded-xl p-4 shadow-inner flex flex-col justify-around border-2 border-blue-800 relative gap-4 overflow-y-auto">
+      <h2 class="text-2xl font-bold text-center">Nueva Venta</h2>
+
+      <label class="flex flex-col gap-1">
+        Cliente:
+        <input type="text"
+          class="px-3 py-2 rounded-lg bg-[#102e4d] border border-blue-600 text-white focus:outline-none focus:ring-2 focus:ring-blue-400" />
+      </label>
+
+      <label class="flex flex-col gap-1">
+        Fecha:
+        <input type="date"
+          class="px-3 py-2 rounded-lg bg-[#102e4d] border border-blue-600 text-white focus:outline-none focus:ring-2 focus:ring-blue-400" />
+      </label>
+
+      <label class="flex flex-col gap-1">
+        Total:
+        <input type="number"
+          class="px-3 py-2 rounded-lg bg-[#102e4d] border border-blue-600 text-white focus:outline-none focus:ring-2 focus:ring-blue-400" />
+      </label>
+
+      <label class="flex flex-col gap-1">
+        Estado:
+        <select
+          class="px-3 py-2 rounded-lg bg-[#102e4d] border border-blue-600 text-white focus:outline-none focus:ring-2 focus:ring-blue-400">
+          <option value="pagada">Pagada</option>
+          <option value="pendiente">Pendiente</option>
+          <option value="cancelada">Cancelada</option>
+        </select>
+      </label>
+
+      <button
+        class="px-4 py-2 mt-2 bg-green-600 hover:bg-green-700 rounded-lg text-white font-semibold transition-colors">
+        Guardar Venta
+      </button>
+    </div>
+  </div>
+
+  <!-- PIE CON ESTADÍSTICAS -->
+  <div class="flex justify-around items-center h-24 bg-white/10 rounded-xl shadow-inner flex-none flex-wrap">
+    <div class="text-center">
+      <h3 class="text-lg font-semibold">Ventas Hoy</h3>
+      <p class="text-2xl">5</p>
+    </div>
+    <div class="text-center">
+      <h3 class="text-lg font-semibold">Total Ingresos</h3>
+      <p class="text-2xl">$1,230.00</p>
+    </div>
+    <div class="text-center">
+      <h3 class="text-lg font-semibold">Canceladas</h3>
+      <p class="text-2xl">2</p>
+    </div>
+    <div class="text-center">
+      <h3 class="text-lg font-semibold">Clientes Únicos</h3>
+      <p class="text-2xl">4</p>
+    </div>
+  </div>
+</div>

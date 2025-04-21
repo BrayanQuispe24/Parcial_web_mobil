@@ -1,0 +1,73 @@
+<div class=" min-w-[400px] max-w-[500px] mx-auto max-h-[7200px] min-h-[600px]  px-6 py-3 bg-[#102e4d] bg-opacity-90 text-white rounded-2xl shadow-lg backdrop-blur-sm ">
+  <h2 class="text-2xl font-bold text-center mb-2">Actualizar CLiente</h2>
+  <button
+  (click)="modalService.mostrarActualizarClienteSwitch()"
+    class="absolute top-2 right-2 bg-red-600 px-[25px] py-[10] rounded-[5px] hover:scale-[1.05] hover:bg-red-400">X</button>
+  <form
+  (submit)="cerrarModal($event)"
+  class="space-y-4  flex flex-col justify-around">
+    <!-- Nombre -->
+    <div>
+      <label for="nombre" class="block text-sm font-medium mb-1">Nombre</label>
+      <input
+      [value]="nombre()"
+      id="descipcion" name="descipcion" type="text"
+        class="w-full px-4 py-1 rounded-lg text-white border-2 bg-[#102e4d] border-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600"
+        placeholder="nombre" />
+    </div>
+    <!--Nuevo Nombre-->
+    <div>
+      <label for="nombre" class="block text-sm font-medium mb-1">Apellido</label>
+      <input
+       [value]="apellido()"
+      id="descipcion" name="descipcion" type="text"
+        class="w-full px-4 py-1 rounded-lg text-white border-2 bg-[#102e4d] border-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600"
+        placeholder="Televisor 45p" #txtnuevaDescripcion />
+    </div>
+    <!-- Nombre -->
+    <div>
+      <label for="marca" class="block text-sm font-medium mb-1">Telefono</label>
+      <input
+      [value]="telefono()"
+      id="marca" name="marca" type="text"
+        class="w-full px-4 py-1 rounded-lg text-white border-2 bg-[#102e4d] border-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600"
+        placeholder=" Adidas" #txtmarca />
+    </div>
+    <!-- Nombre -->
+    <div>
+      <label for="categoria" class="block text-sm font-medium mb-1">Direccion</label>
+      <input
+      [value]="direccion()"
+      id="categoria" name="categoria"
+        type="text"
+        class="w-full px-4 py-1 rounded-lg text-white border-2 bg-[#102e4d] border-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600"
+        placeholder="Lacteos" #txtcategoria />
+    </div>
+    <!-- estado -->
+    <div>
+      <label for="precio" class="block text-sm font-medium mb-1">Estado</label>
+      <input
+     [value]="estado()"
+      id="precio" name="precio" type="text"
+        class="w-full px-4 py-1 rounded-lg text-white border-2 bg-[#102e4d] border-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600"
+        placeholder=" 5$" #txtprecio />
+    </div>
+    <!-- costo -->
+    <div>
+      <label for="usuario_id" class="block text-sm font-medium mb-1">Usuario id</label>
+      <input
+      [value]="usuario_id()"
+      id="costo" name="costo" type="text"
+        class="w-full px-4 py-1 rounded-lg text-white border-2 bg-[#102e4d] border-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600"
+        placeholder=" 4" #txtcosto />
+    </div>
+    <!-- Botón -->
+    <div class="pt-1">
+      <button
+      type="submit"
+        class="w-full bg-blue-800 bg-opacity-80 hover:bg-blue-700 hover:bg-opacity-100 hover:scale-[1.02] transition-all px-4 py-2 rounded-xl text-white font-semibold shadow">
+        Actualizar
+      </button>
+    </div>
+  </form>
+</div>

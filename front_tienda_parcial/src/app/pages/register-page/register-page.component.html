@@ -1,0 +1,54 @@
+<div class="w-screen h-screen bg-gradient-to-br from-gray-900 via-blue-950 to-gray-800 flex justify-center items-center p-4">
+  <form (submit)="register($event)"
+  class="w-full max-w-md bg-white/10 backdrop-blur-sm rounded-2xl shadow-2xl border border-white/20 p-8 flex flex-col space-y-6 text-white">
+    <h2 class="text-3xl font-bold text-center">Registro</h2>
+
+
+    <div class="flex flex-col space-y-2">
+      <label for="email" class="text-sm text-gray-300">Correo electrónico</label>
+      <input
+        type="email"
+        id="email"
+        placeholder="tucorreo@email.com"
+        [value]="gmail()"
+        (input)="gmail.set(txtgmail.value)"
+        #txtgmail
+        class="px-4 py-2 rounded-md bg-white/10 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+    </div>
+
+    <div class="flex flex-col space-y-2">
+      <label for="name" class="text-sm text-gray-300">Nombre completo</label>
+      <input
+        type="text"
+        id="name"
+        placeholder="Juan Pérez"
+        [value]="name()"
+        (input)="name.set(txtname.value)"
+        #txtname
+        class="px-4 py-2 rounded-md bg-white/10 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+    </div>
+
+    <div class="flex flex-col space-y-2">
+      <label for="password" class="text-sm text-gray-300">Contraseña</label>
+      <input
+        type="password"
+        id="password"
+        placeholder="********"
+        [value]="password()"
+        (input)="password.set(txtpassword.value)"
+        #txtpassword
+        class="px-4 py-2 rounded-md bg-white/10 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+    </div>
+
+    <button
+      type="submit"
+      class="w-full bg-blue-600 hover:bg-blue-700 transition-colors text-white py-2 rounded-md font-semibold"
+    >
+      Registrarse
+    </button>
+    <a routerLink="/login" routerLinkActive="router-link-active" >Ya tienes una cuenta?</a>
+  </form>
+</div>

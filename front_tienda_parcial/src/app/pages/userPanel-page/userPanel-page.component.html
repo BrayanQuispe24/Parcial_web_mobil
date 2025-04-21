@@ -1,0 +1,66 @@
+<div
+  class="h-full w-full bg-[#102e4d] bg-opacity-90 text-white p-4 box-border flex flex-col gap-4 rounded-tl-2xl overflow-hidden">
+  <div class="flex justify-between items-center py-4 px-6 bg-white/10 rounded-xl shadow-lg ">
+    <h1 class=" w-[100%] text-4xl font-bold text-center">Gestión de Usuarios</h1>
+    <div class="flex gap-2 flex-wrap justify-center">
+      <button (click)="exportPDF()" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg font-semibold">Descargar</button>
+    </div>
+  </div>
+  <!-- Botones de acción -->
+  <section
+    class="flex flex-wrap gap-4 justify-around items-center w-[100%] h-[15%]  bg-white/10 rounded-xl border-2 border-blue-800 ">
+    <button (click)="modalCreateService.showModalCreateSwitch()"
+      class="w-[20%] h-[50%] bg-[#102e4d] hover:bg-opacity-100 hover:scale-105 transition-transform duration-300 px-4 py-2 rounded-xl shadow-md text-sm border-2 border-blue-800 ">
+      ➕ Crear
+    </button>
+
+    <button (click)="modalSearchedService.showModalSearchedUserSwitch()"
+      class="w-[20%] h-[50%] bg-[#102e4d]   hover:bg-opacity-100 hover:scale-105 transition-transform duration-300 px-4 py-2 rounded-xl shadow-md text-sm border-2 border-blue-800 ">
+      ✏️ Buscar
+    </button>
+
+  </section>
+
+  <!-- Lista de usuarios con divs -->
+  <div
+    class=" max-w-[100%] min-w-[70%] basis-2/3 bg-white/10 rounded-xl p-4 shadow-inner overflow-y-auto h-full flex flex-col border-2 border-blue-800 relative">
+    <app-user-list />
+  </div>
+
+  <div class="flex justify-around items-center h-24 bg-white/10 rounded-xl shadow-inner flex-none">
+    <div class="text-center">
+      <h3 class="text-lg font-semibold">Categorías</h3>
+      <p class="text-2xl">{{5}}</p>
+    </div>
+    <div class="text-center">
+      <h3 class="text-lg font-semibold">Activas</h3>
+      <p class="text-2xl">{{8}}</p>
+    </div>
+    <div class="text-center">
+      <h3 class="text-lg font-semibold">Inactivas</h3>
+      <p class="text-2xl">{{9}}</p>
+    </div>
+  </div>
+  @if(!modalPermisosService.modalAsignacionPermisos()){
+  <permissions
+    class="fixed  z-50 w-full h-full bg-[rgba(0,0,0,0.5)] flex justify-center items-center rounded-2xl top-0 left-0" />
+  }
+  @if(!modalSearchedService.modalSearchedUser()){
+  <search-user
+    class="fixed  z-30 w-full h-full bg-[rgba(0,0,0,0.5)] flex justify-center items-center rounded-2xl top-0 left-0" />
+  }
+  @if(!mostrarUsuarioBuscado.mostrarUsuarioBuscado()){
+  <show-user-searched
+    class="fixed  z-30 w-full h-full bg-[rgba(0,0,0,0.5)] flex justify-center items-center rounded-2xl top-0 left-0" />
+  }
+  <!-- Modal de creación de usuario -->
+  @if (!modalCreateService.modalCreateUser()) {
+  <app-create-user-component
+    class="fixed top-0 left-0 w-full h-full bg-[rgba(0,0,0,0.5)] flex justify-center items-center z-50" />
+  }
+  @if (!modalUpdateUserService.modalUpdateUser()) {
+  <update-user-component
+    class="fixed  z-50 w-full h-full bg-[rgba(0,0,0,0.5)] flex justify-center items-center rounded-2xl top-0 left-0" />
+  }
+
+</div>
